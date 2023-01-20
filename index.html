@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="dist/css/style.min.css" rel="stylesheet">
+    <script defer src="./js/main.js" type="module"></script>
+    <title>SearchMe</title>
+</head>
+<body>
+    <main>
+        <h1 class="offscreen">Search Me A Wikipedia Powered Search Engine</h1>
+        <section class="searchEntry">
+            <h2 class="offscreen">Search Term Entry</h2>
+            <div class="logo" aria-hidden="true">
+                <span class="blue">S</span>
+                <span class="red">e</span>
+                <span class="yellow">a</span>
+                <span class="blue">r</span>
+                <span class="green">c</span>
+                <span class="red">h</span>
+                <span class="blue">M</span>
+                <span class="yellow">e</span>
+                <span class="red exclaim">!</span>
+            </div>
+            <form id="searchBar" class="searchBar">
+                <label class="offscreen" for="search">Enter a search term or phrase</label>
+                <input id="search" type="text" autocomplete="off">
+                <div id="clear" class="none button clear" role="button" tabindex="0" aria-label="Clear search terms">
+                    <i class="fas fa-times"></i>
+                </div>
+                <button id="searchButton" class="button searchButton" type="submit" aria-label="Submit button">
+                    <i class="fas fa-search blue"></i>
+                </button>
+            </form>
+        </section>
+        <section class="results">
+            <h2 class="offscreen">Search Results</h2>
+            <div class="statsBar">
+                <div id="stats" class="stats" aria-live="assertive"></div>
+            </div>
+            <div id="searchResults" class="searchResults">
+
+              <!----  <div class="resultItem">
+                    <div class="resultTitle">
+                        <a href="">Dachshund </a>
+                    </div>
+                    <div class="resultContents">
+                        <div class="resultImage">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBYVFRgWFhYZGBgaGhgaHBkcHRgaHh4eHh4aIR4eHB4cJC4lHx4rIxwaJjgnKy8xNTc1HCQ7QDs0Py40NTQBDAwMDw8QHxISHzQnISsxPzE1NzQ0NDQ2PzQ0NjU0NDQ0NDE0NDQ0MTQ0NDQxNDQ0NDE0NDE0MTE0PTQxNDQ9NP/AABEIALIBGwMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAABwIDBAUGAQj/xABCEAACAQIEAwYEAgcHAgcAAAABAgADEQQSITEFQVEGByJhcYETkaHwMrFSYnKiwdHhFCMzQoKS8bLSFRYkc4PCw//EABgBAQADAQAAAAAAAAAAAAAAAAACAwQB/8QAIBEBAQEAAgMAAwEBAAAAAAAAAAECAxESITFBUWETIv/aAAwDAQACEQMRAD8AmaIiAiIgUk21M5DjvbyjQBFJTWcX55FB82IJPsDMHvY4m6YdKFJir1XGa3Kmv4rnlclQOuvQyJ8TihSQddhfr1PXqYHb1u8LGtqDRpjkApY+WrNr8pgr2+xqG7YpD+qaVO37tj9ZHeGxzM/jbNr+I76dOkycbQYlTfTrAlnhXeshIFdBy8SeH3yMSfrO74Vx/D4gD4VVWJF8uzf7TrPmjG4S63B1H3pLPCeItSa2YrY3BGhU9RA+sokf93vbM4kCjWYGoB4W/TA5H9b79ZAgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgImi7RdpqGCC/EJLPfIii7Nbc+Q1Gpkccc7c4zEDLSQ0KZuMykFz78vveBKPE+OYfD/41ZE0vYnW3Ww1tOI413uYWndaCtWbk1sq/zP0kWDBtXqgOWNybsxLG/O9tpuP/AC1TQfhv5mQu8y9JzFs7artN2krYlviOTdrWHQdBbQDy85RUUPSBULmGwO+u9tNfSZ+K4KhFwtha+k19RVRMpDEkmwHkbfKdmpS5uVXD+H/ETKaRLqGYuSBoCABawO3U3087Sxi7iyqpPnytLS8QYLzA5XJJ+unyEu0qgVb3JvyPWSRr1Wyi1rzUVaOeqQNPDf8Ah+c2D1woJPMbSzw2p4i/6VlHoDmb/wCo+cOHCsVWw1VXRyjKwIO4uDpodCLz6L7FdoP7bhxUYAVFOSoo2zDmAdQCCD8xykHpRWobkbDl1JH37zN7KdoquCxOZdabHK6cmW/0Ycj59CYH0PEtUaoZVZTdWAYHyIuJdgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiBwveb2efE0krUVJrUWuMouxQkZsouMxFgwHPUc5E1HE1qhcZsqm4Yhcoax/RIuD5WB9J9JSL+2nYZwzYnDAsL5mpAXYcyUH+Yfq7jlfaR1b16Sx49+3HcOK0rDfz3mdja7AEjXY+3IzTioOtwOgXQjkQdvT1mypVkKXc2FrhfvaYbNW91vlz16U0MWHUq5Kg8xvMTF0E/Tz9HAPyI/lLi9oMMpsUzW5WE3OEfCuqsCBmvZb/w5ekeW+P316cucb9SuBx+DdTlIF+RH9OU94bRV6qU22J1PrO34vhMEFOZxmA0Kk3v00nIV8OlNg6Mb7i8045vOdSe2bXF43u/GP2owHw6gRWzXP/EsYVdRl1AAA+tz7kk+8Yuszks5ux/LoJcwzdJdmWZ9/VWrLr/n42mGbLfmfy+/4RhagYm2hXXYWmHUxeQi+/T8pgKHLgglSdZ1F9E933EPjYKn1Qsh5bHw/ukfKdRIv7p8c2Z6WmUpmPI51IGnqCb/ALIkoQEREBERAREQEREBERAREQEREBERAREQEREBERAREQOc452KwWLbPVojOd3QsjH9ooRm97zUHur4cd0qnyNWp/Od1ECP6ndLw47LVUc7OTf/AHAke04/tH2ExGFavWohBhkUFAWZqlvDe+nUtzk3zA44QMNXJtYUqhNxcaKdxI6nc6Szqy9vnNeHNUGdWa/NWJOvleanidZgwUG1p3GFoBlzp4Qwv8wJw/G7CqeszcOrd9fpq5pJjuPGH8ry/h38VvTWe0kzKD11mRSpWce3yE1savEYcFxpewt9iMSQgy28Uy8ay09b2vrfaaqixqPmsHVWUspuM4vqNNQptbrrAlTuq4FXDLimslEowVf81QnTP5JvY89DtqZWkd4HvKogBDh2QKAMqspsLaZRYaTpeF9rsHiNErKG0GVvCbnlroT6GBv4nkxMVxGjT/xKiL6sAflvAzInK8Q7cYan+Elz5eEX6EtY/SaHGd5dv8Oiu5HiY/wAgSREh3Ed4WKYnKyJfkqg/ItearE9rcS+hr1B6OVH7toE51aqqLswUdSQPzmvrcewy/ixFIf61P5GQNUxbOczMxJ3JJ/OWzrqSbeu0Cbq3bTBqbfEJ9Fa3zIEuU+12DYX+MB7N/ASCyguLnQ3Btt5H8pVhq+Ved72PpyMCd6XanBttiE97r/1ATYYbHU6n+HUR/2WVvyM+ehUL25XuAQBffkfO8xqGPyG6scynQjRgRA+mIkJdne9WpSISuDVQbkm1Rfc6N6NY+clvg3GqGKTPQcOOY2ZT0ZTqD6wNlERAREQEROG7Xd4uHwd0QirV10B8K2/SI3PkPmIHcxI47H8JxuKrLjsdUqKo8VKhdlU/osyA5VAvcAjMTYnbWR4CIiAiIgJou2tcpgMUy7ihUt7qR/Gb2cX3q1WHD3CkAMyo/mrXFh/qywIkw3aBFoEZNRp9AB7aTjMXWLuzdTfrLpc5CPMXlmilzIZ485ts/KeuTWpJWRhsUyenSbDD8XRdQpL+ZuPlNfiQAvmdpawaAk+WsmgzKper42N2+Vh5dJSAaak31YZdP5zMopcdABc8pS2HLtci4A0G3TeBl/EvTVyTnyj6EW97S9QrBwGBUOAAeR0539vu8wcS5CAHqb/AMBMLD1GDXG5gdEvEa4BRKjrY/gDMBrroAdPvzlujiGP4sxPz+o295i4kkMpPMC4mZQYMq358+RgVOxDaDSwvY6jaXrL12+v9JSG5WAPpPHq2FjbT0gUo17a/enSekXO1pi1qwB8ue/0+Zlb1tNOm/1gZD2I1+/aW00B5/8AH/MwKmM10+f9ZZfiJ0Gun3ttA2JJ2O2nT85g1HIe+5G46/YMtpjTcTzEPrproNYGzw+qg32J2/L+M1uJVlI0AsTa176aXPKe0qxAAOw+d/b2mRi6ecCx5wMbhfC3xNRaNOxqP+Ak5QWUFspJ01ANvMDrM0Pi+HVgKiVKFTk2ozAfosNHXUX3GuswmVqRUqzKy2KspIYEaggixB2kzdkMTT4zw80sYoqVKbFHawDA2ulRSPwkqbXG5Dcpx1rezXeuDZMWn/yIPq6fxX5TuaPa/AuLjE0x+02T/qtI54p3MsCThcTpySqpH76f9s0jd2vFFJHw6bfrColj6ZrH5idcTDU7YYFd8XR9nUn5CabH95uAQHJUaqeiKQPdmsLfORxhu7LiVQeJKVP/ANyoP/zDfWbvhnc2xIOJxQA5rRUk/wC99v8AbAwOM9ucXxBxh8MjDNtSpk5mHPPU0svXZet51nYzu4SgVr4u1WuDdU3p0zysD+Nh+kdAdhpedbwDs5h8EmTD0wl/xN+J2/aY6n02HK03MBERAREQEREBI177cayYSkgGlSuuY+SAsB7kD5SSpF3fuzf2SgoXwmvct0IRwo98zfKBDFOmoVs3y57zylTW9hreWXN2Mu0xkYQLGJfM30mZh8OFTMTqSBby5/ymJhqWd/qfSZVaqVOXL5C9/pAz6NJnuoAAPTfrL1dwnhA8R3PXTTbpMfAO6Ak6X09rRU533OpgMTd021B3H8pjYZLOCdgZnYSplRieUsswZVbaxsx/KBn4mkSRe9iPv785StXJZSb2+xKMdxNRYKNQALzWYjFFj7QNz/aNBrvce/OYWKxWvvLHxtBp9+ss4k+LrAvGsLef37y4uIGRr+LSw6+81t5WhsD5wKLxeeXnhaBVe0ykrZj08/8AmYRMuUN/KBktM2hU0tMAmeo9oGezZwQTrradZ3L8SNPHPRJstam1h1dPEPfLnnFYd/FPcJxBsNiUxCfiR1cDkbbqfJhce8D6siYvD8aleklVDdKiK6nyYAi/nrMqAiIgIiICIiAiIgIiICcX3r01bhtXMLkNTK/tZ129sw9CZ2k1PaXh4xGGq0iL3UkftLqPqIHy6Rcm1haMOljnJvbYSumgI13Op9eYlSpl22gYBrEMSNPSbDDVywuTf1mNWwxPiHOWFRttYG1xPEBay8hvMbCubEm+sxF2tbnM3DDKN9vzgV42pYBBy39ZTVxhKKmll+zf6THfU3lOWBbJnonuWLQMnDnrsNZ7VF9YwtO/9ZmtT1sNVgYuHpWu3QSw53vMz44UkcjMGoSTrAtsZ7RpM5silj5S7hsMXPQdZ0PBciE21y7Hlfqepkda6iWc93pi4fgDIA1TQk6L5c7yw/DCTlph3I1sisxFzYbDrpN7xHFBQCxu7bLzA6kcpvuwPamlhK5SpZadbKrOf8rC+VmP6OpB6XB2BkM6137WaxOvSOBfVTyJBHMHoehlSJfQbz6V7Q9l8NjktWpjNbw1F0dfRhuPI3B6SA+0fAamAxLUKmqnxJUtYOp5jow2I5HyIlqlqaYsddJbxw+9pmt5SzilGQG2oNoE29zONL8OCE3NKpUT0Bs4H70kCQz3GcQyvicOSPEEqKOZIuGt7FPlJmgIiICIiAiIgIiICIiAiIgfOfeL2abBYp7A/ArFnpnkDuyHzBPuCD1nIgnY/KfUXaXglPG4d6FQaNqrc1YfhYeYPzFxznzdx7g1TCVmo1Vs68+TKdmU8wf59IGCMQU21m34W1OoMp0PymjcXHpLa3BuL+0hvPcTxvxvztseJYUU3sD52mIHlJqM34jK0oncyWZZPbmrLe48C854svPT00udL7S0o8Pv9/flOoqDAEEy7hwNzAv4cgW/OX6lU7LuZ4KObRRf05ep5TecN7H4ysAKGHc30NRrIg9C1rjzUGBzLkDzMs3uQNSSbADcnoPOS/wfubXRsViCx/QpCw9C7gk+yid7wDsnhMHc0KKqx3drs9ugZrkDyGkCFeB93+PxIX+7NCmSPFU8Gh3IT8ZIHIgA9RJX4N3eYKgozIazAWzOdL9Qq2UeW5HWdjNJ2o48mDoNUYjNYhFO7NyHpzJ6Tl6k7rs7t6iA+1/Blw2Kr00ZmVG8Nzc2IDAEnUkZrX8pzVR2AF/vym9xZes7O7HOxLM29ydSZt+y/YHEcRbOW+FhwbfEYXL2Ovw15j9Y6eu0qxryq7knjEmdzvEnrcPAck/DdqasdboApUX55c2X0Am47bdl04hhzTbw1Fu1J/0Xtz6qdiPfcCbLgXB6WEorQoghEHPUkk3JJ5kkkzZy5Q+XeLcMxOEbLiKL0z1I8J1t4XHhPz6TXVKmYWB1n1bXoK6lHUMpFirAEEeYMi7tZ3T0mVqmDLIw1+ETmUjnlJ8QPQXI5aTnx36ivhOIq0Ki1KTFHQh1PmOR63F9Dvsd5NvYHt8Mcfg1UCVgLgqfC9hc2B1Uje1zpz5SKMf2dNKnnVy2QXb0G9pse7BQ3E8Py/xX9f7pxr0/H9JzO86ncrusazeq+hIiJJEiIgIiICIiAiIgIiICRt3y8CFTCjFKP7ygRm/WpsQCD+ySGB5eLrJJmPjcKtWm9NxmR1ZGHVWBBHyMD5NRL854wPOdRxnsy1Co9Et40Yrf9Ibq3upU+81NHhpdsjb62IF9vLr5Sr/XPvtd/jrqWNS7AdZfSuctt+c7jiPdFjlF6bUqoIBtmKMPIhxb96cXi8BUw9RqNVMjocrrdTYkA7qSDoRsZapZeEcMCF0Yi2+ks8QpBMqCxsNSOp1PyvaY6WvJn7teyeGrYJK9ekKj1HqEFi2iqxQCwNiPCTr1gQpSw7uQqqWY7AAkn0Akidle6rEVrPiT8Cnvl3qMPTZPfXykzYHguHo60qFND1VFB+YF5sYGi4T2VwmHCinRW62szeJr9bnn5jrN7EQEw8fj6VBDUrOtNBuzEKNdhc8/KZkjDvU7IY3Guj0WV0QWFEnLYndrk2ZidOVgBAq4p3tYcBhhkao2oVn8Kk9Qv4iPI5ZFnFeN1cTUZ6zlmPXYDoo2A8hLdfsRxFDZsJV/0gMPmpMvYDsPj3YKcPUQXALMALDmQCdT5SvWbftW53M/I6rsR2RONOZyVw6mzkaF9PwKeV7jMeQ0GpuJto0VRVVVCqoAUAWAAFgAOQAmJwPh6YehTpU1KqigAG178y1t2JuT6zZSWc+M6Q3ryvZERJIk8nsQIo7W4MLWrIdEJD2AtfML/wBPaavus4eP/EnaxCpQOQEHdvhqdfIX+c33eBV/9TkHOmt/m/8AOO7pstcryZGF99VKG1/Qn5TFw3x5Ln+tvLm3izr+JNiIm1iIiICIiAiIgIiICIiB5ExcdjUoo1SowVF3J+QHqTIq4/3rOWyYenkXUZ3UsxHJlsco/ekbZHZm1V3l10bGKq2zJTCsR1JJCn0BH+6c3wvhdSvVWjTdUdg2VmvYEAnWwJ5TW0OJhnZj4nY5m8RO+5N9bzoOymNYcRwyIhcljcgaBCpDMelgbzH1rXJ7jf3M8X1N9JSAATc2Fz1PMz5s7ycG9PiOJD3Od86k81cAj5fh/wBM+l5DPejiKD4wK+rU0VTy6tb08U2a14ztixnyvSNOH4J6jAAb215T6R7DUAmBw6gWsn1LEk+5195EvDaaMQFUD25eRk18EoBKFJRsEX6i5+plXHy+er/FnLxeEjYRES9QREQEREBPLT2ICIiAiIgeTC4rj0w9J6z3yoLnr0AHmSQPeZs5Xt9wqviMNkoEEqwYpa5e2wBLAXBs2t9utodiOuKcaGMZ8QQEAIUANewGgBI0vNt2RxIpvTdPGrVxTa2pGcBPkCwJPSatuw9dKKJTpujuF+ICCy5tNyNAL9DOg7G9ka9Jk+Krqq1DUDF01IJtZVNxcbg7THOO+V1O/rXeSeEzeviToiJsYyIiAiIgIiICIiAiIgcz2r7KpjQpLurIGCfhZbm2pRlIvpa4sbE6yOeJ92uNc6LScqgRXFUoNP8AMVyXvbS17esmuJy5lvaU1ZOohXh/dtilNvhom2rMpF9iRlu1jvYidx2S7Drg3NapU+NWtZWy5AgIOYKLm97jU9B5zsoEjMSXv8l3qzr8MbHYpaSNUc2VRr7mwHqSQPefNvbXi64vFPXUWDMFXc6AAC9uen1kt97hqthqdOmGytUzOw2sosFJ6ktmH7Ei+h2V+IHdXDimwVVW+osGN2NrEXt000Mjuye7fSzjl+T7V3gXEAhCOwz3Fh1/rJ64FVDUKZBvZQp9RofykBcD4Cz1kZ/BfOyKVJLgMttOQ8QsRvaT5wLDmnQRWFjYkjoSSbfWQ489b9fr2nzb8s9X8Vs4iJoZiIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIFuqJQKCjZVHoAIiBWJXPYgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiB//Z" alt="Dachsund">
+                        </div>
+                        <div class="resultText">
+                            <p class="resultDescription">The Dachsund (UK: DAKS-and, DASH-, -hund, -huunt or US: DAHKS...</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p><span aria-hidden="true">&lt;&lt;</span> Powered by <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a> <span aria-hidden="true">&gt;&gt;</span></p>
+    </footer>
+</body>
+</html>
+
